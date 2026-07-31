@@ -1,25 +1,14 @@
-import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
 
-class ConverterMaterial extends StatefulWidget {
-  const ConverterMaterial({super.key});
+class ConverterCupertino extends StatefulWidget {
+  const ConverterCupertino({super.key});
 
   @override
-  State<ConverterMaterial> createState() => _ConverterMaterialState();
+  State<ConverterCupertino> createState() => _ConverterCupertino();
 }
 
-class _ConverterMaterialState extends State<ConverterMaterial> {
+class _ConverterCupertino extends State<ConverterCupertino> {
   double result = 0;
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-    super.dispose();
-  }
-
   final TextEditingController textEditingController = TextEditingController();
 
   void convert() {
@@ -40,31 +29,14 @@ class _ConverterMaterialState extends State<ConverterMaterial> {
 
   @override
   Widget build(BuildContext context) {
-    const customBorder = OutlineInputBorder(
-      borderSide: BorderSide(),
-      borderRadius: BorderRadius.all(Radius.circular(12)),
-    );
-
-    return Scaffold(
+    return CupertinoPageScaffold(
       // backgroundColor: Color(0xFFFF9000),
-      backgroundColor: Colors.grey,
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        elevation: 0,
-        title: Text("Currency Converter"),
-        titleTextStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontSize: 32,
-        ),
-        centerTitle: false,
-        // leading: Icon(
-        //   Icons.currency_exchange_sharp,
-        //   color: Colors.yellow,
-        //   size: 32,
-        // ),
+      backgroundColor: CupertinoColors.systemGrey,
+      navigationBar: const CupertinoNavigationBar(
+        backgroundColor: CupertinoColors.systemGrey,
+        // middle: Title("Currency Converter", color: CupertinoColors.white),
       ),
-      body: Center(
+      child: Center(
         // child: ColoredBox(
         //   color: Color.fromRGBO(197, 192, 192, 0.612),
         child: Column(
@@ -82,45 +54,44 @@ class _ConverterMaterialState extends State<ConverterMaterial> {
             ),
             Padding(
               padding: const EdgeInsets.all(8),
-              child: TextField(
+              child: CupertinoTextField(
                 keyboardType: TextInputType.numberWithOptions(
                   decimal: false,
                   signed: false,
                 ),
-                decoration: InputDecoration(
-                  // labelText: "Please enter the amount in USD.",
-                  // label: Text(
-                  //   "Please enter the amount in USD.",
-                  //   style: TextStyle(color: Colors.white),
-                  // ),
-                  // helperText: "Please enter the amount in USD.",
-                  hintText: "Please enter the amount in USD.",
-                  hintStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-                  prefixIcon: Icon(Icons.monetization_on_outlined),
-                  prefixIconColor: Colors.black,
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: customBorder,
+                decoration: BoxDecoration(
+                  border: BoxBorder.all(),
+                  borderRadius: BorderRadius.circular(5),
+                  // filled: true,
+                  // fillColor: Colors.white,
+                ),
+                placeholder: "Please enter the amount in USD.",
+                placeholderStyle: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+                prefix: Icon(
+                  CupertinoIcons.money_dollar_circle,
+                  color: CupertinoColors.black,
                 ),
                 controller: textEditingController,
               ),
             ),
-            TextButton(
+            CupertinoButton(
               onPressed: convert,
               // style: const ButtonStyle(
               //   backgroundColor: WidgetStatePropertyAll(Colors.black),
               //   foregroundColor: WidgetStatePropertyAll(Colors.white),
               //   padding: WidgetStatePropertyAll(EdgeInsets.all(12)),
               // ),
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.all(12),
-              ),
+              // style: TextButton.styleFrom(
+              //   backgroundColor: Colors.black,
+              //   foregroundColor: Colors.white,
+              //   padding: EdgeInsets.all(12),
+              // ),
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.currency_exchange),
+                  Icon(CupertinoIcons.add_circled),
                   SizedBox(width: 8),
                   Text("Convert"),
                 ],
